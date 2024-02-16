@@ -1,0 +1,25 @@
+{%extends "main.html"%}
+{%block title%}search
+{%endblock%}
+{%block content%}
+<h1>Search</h1>
+<form  action="{%url 'search_contact' %}" role="search" method="get">
+    <input name="search" class="form-control" placeholder="Search by name" type="text"/>
+    <br><button type="submit" class="btn btn-primary">Search</button>
+</form>              
+
+{% if results%}
+    <h2>Search Results</h2>
+    <ul class="list-group">
+        {% for contact in results %}
+            <li class="list-group-item">
+                {{ contact.name }} : {{ contact.phoneno }}
+            </li>
+        {% empty %}
+            <li class="list-group-item">No contacts found.</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Please enter a search query to find contacts.</p>
+{% endif %}
+{%endblock%}
